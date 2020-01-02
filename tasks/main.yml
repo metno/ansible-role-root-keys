@@ -1,0 +1,50 @@
+---
+- name: check if we're running supported os
+  assert:
+    fail_msg: "{{ role_name }} only supports ubuntu and centos!"
+    success_msg: "{{ role_name }} supports {{ ansible_distribution }} version {{ ansible_distribution_version }}"
+    quiet: "{{ not ansible_check_mode }}"
+    that:
+      ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
+
+- name: python selinux module
+  yum:
+    name: libselinux-python
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version|int == 6
+
+- name: real list of enabled users if root_keys_users_limit|length > 0
+  set_fact:
+    root_keys_users_real: '{{ root_keys_users | selectattr("enabled", "defined") | selectattr("enabled")  | map(attribute="user") | list | intersect(root_keys_users_limit) }}'
+  when: root_keys_users_limit|length > 0
+
+- name: |
+    always add root_keys_users_always
+    use all enabled users as base if root_keys_users_limit|length == 0
+  set_fact:
+    root_keys_users_real: '{{ root_keys_users_real | default(root_keys_users|selectattr("enabled", "defined")|selectattr("enabled")|map(attribute="user")|list) | union(root_keys_users_always) }}'
+
+- name: fix rights on root/.ssh
+  file:
+    state: directory
+    path: /root/.ssh
+    mode: 0700
+    owner: root
+    group: root
+  when: ansible_system != "Win32NT"
+
+- name: create directory Administrator/.ssh
+  win_file:
+    state: directory
+    path: "C:\\Users\\Administrator\\.ssh"
+  when: ansible_system == "Win32NT"
+
+- name: dist authorized_keys
+  template:
+    src: authorized_keys.j2
+    dest: "{{ root_keys_authorized_keys_file }}"
+    mode: 0600
+    owner: root
+    group: root
+

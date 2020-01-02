@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+
+  pre_tasks:
+    - name: add custom root_keys_users
+      set_fact:
+        root_keys_users: '{{ root_keys_users + root_keys_users_custom|default([]) }}'
+
+  roles:
+    - ../../.
+

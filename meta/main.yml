@@ -1,0 +1,27 @@
+galaxy_info:
+  author: IT infrastructure
+  description: Sysadmins
+  company: MET Norway
+
+  license: GPL-2.0-or-later
+
+  min_ansible_version: 2.4
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: CentOS
+    versions:
+    - all
+  - name: Windows
+    versions:
+    - 2019
+    - 2016
+
+  galaxy_tags:
+  - root
+  - ssh
+
+dependencies: []
+

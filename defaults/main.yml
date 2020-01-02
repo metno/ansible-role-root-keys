@@ -1,0 +1,7 @@
+---
+root_keys_allow_ips: []
+root_keys_restrict: restrict,pty
+root_keys_users_limit: []
+root_keys_users_always: []
+root_keys_users: []
+root_keys_authorized_keys_file: "/root/.ssh/authorized_keys"

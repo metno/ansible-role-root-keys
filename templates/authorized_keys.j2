@@ -1,0 +1,12 @@
+{% for item in root_keys_users | selectattr("user", "in", root_keys_users_real) | list %}
+{% for key in (item.key|trim).split('\n') %}
+{{ item.restrict|default(root_keys_restrict) }}
+{%- if item.restrict|default(root_keys_restrict) and item.allow_ips|default(root_keys_allow_ips) %}
+,
+{%- endif %}
+{%- if item.allow_ips|default(root_keys_allow_ips) and item.allow_ips|default(root_keys_allow_ips)|length > 0 %}
+from="{{ item.allow_ips|default(root_keys_allow_ips)|join(',') }}"
+{%- endif %}
+{% if item.restrict|default(root_keys_restrict) or item.allow_ips|default(root_keys_allow_ips) %} {% endif %}{{ key }}
+{% endfor %}
+{% endfor %}

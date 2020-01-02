@@ -1,0 +1,31 @@
+---
+root_keys_allow_ips:
+  - 10.0.0.0/8
+  - 172.16.0.0/24
+root_keys_restrict: no-agent-forwarding,no-port-forwarding,no-user-rc,no-X11-forwarding
+root_keys_users:
+  - user: user1
+    key: |
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkCVF05JvfkrfOOESivOxV4N8+A/EMEkF7/nCQMRoQg
+    enabled: true
+  - user: user2
+    key: |
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXBWyAhgHwuJEpIsqS/8Tl3yD4p8Mu9SR31lnM7/PKm
+    allow_ips:
+      - 192.168.0.0/24
+    restrict: no-port-forwarding,no-user-rc,no-X11-forwarding,agent-forwarding
+    enabled: true
+
+root_keys_users_custom:
+  - user: user3
+    key: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyLO8A5/7+Ckyl5REO5RpVg1Hpm4t9oM+Rum6k9W8fr6MqgpbJuDJ9mmb5AsoaL80J62mvZQZqXqYCtAfL7ZXMcZZiFwbhpdwRehFfR8vDjae4P4AooV7Vk99I1jvumes1z/FQMvue27lromgMejq/GcEAndlY9smYuQXLy3ajUw3dV+w4rm4L3+Qbps1lft8PZU/G0FMMqqTIPPdcLOLgD/d/625RhVtwqx0C/z3fykylFJ4RkWYQK5p0F/BO8Rr1un7AWYl2ITnOpxe99B9YfE2GI9sTvFAp221cEiozRPBIGJIa1JoZl+tDzb4XbF27Zjs3+6ywbSC5nrIW5gArlgavwKd+fL6vyDJXD+NM86QcGZvlhnMr4wanfHo6JVnekgbxWVaag/JY+yVO3RVZ/VdN+4nF1PXyjmdaLGebUrTDCh2JiPmSZ5Q7y9oyH5/ayJnGxVGCN/d8RK1So2UUhkWV+Z4J22yc2PEc1RD7HyLEI1t9WCT6nciY/t5it2E=
+    enabled: true
+    allow_ips:
+    restrict:
+
+root_keys_users_limit:
+  - user1
+  - user3
+root_keys_users_always:
+  - user2
