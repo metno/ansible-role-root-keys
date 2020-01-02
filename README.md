@@ -13,6 +13,7 @@ This role configures the following.
 Version
 -------
 
+* `1.0.1` --- updated readme
 * `1.0.0` --- first production version
 * `master` --- latest development version
 
