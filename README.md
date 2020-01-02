@@ -130,7 +130,7 @@ GPLv2+
 Author Information
 ------------------
 
-Arnulf Heimsbakk <aheimsbakk@met.no>
-Audun Marius Gangstø <audunmg@met.no>
+* Arnulf Heimsbakk <aheimsbakk@met.no>
+* Audun Marius Gangstø <audunmg@met.no>
 
 ###### set vim: spell spelllang=en:
