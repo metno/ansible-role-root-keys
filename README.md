@@ -1,7 +1,7 @@
 root-keys
 =========
 
-Configure SSH keys for root user.
+Configure root user.
 
 This role configures the following.
 
@@ -9,10 +9,13 @@ This role configures the following.
   * Where user access from.
   * What abilities can be performed.
   * Who of a set of administrators can access.
+* Set root user password.
+* Disable password login from SSH.
 
 Version
 -------
 
+* `2.0.1` --- updated readme
 * `2.0.0` --- prohibit SSH login with password as default and allow changing root password
 * `1.0.1` --- updated readme
 * `1.0.0` --- first production version
