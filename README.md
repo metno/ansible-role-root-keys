@@ -13,6 +13,7 @@ This role configures the following.
 Version
 -------
 
+* `2.0.0` --- prohibit SSH login with password as default and allow changing root password
 * `1.0.1` --- updated readme
 * `1.0.0` --- first production version
 * `master` --- latest development version
@@ -46,6 +47,8 @@ Role Variables
 * `root_keys_users_limit` --- limit to only a list of root users, default `[]`
 * `root_keys_users_always` --- always add this list of root users, overrides `root_keys_users_limit`, default `['ansible']`
 * `root_keys_authorized_keys_file` --- path to the authorized_keys file of root, default `/root/.ssh/authorized_keys`
+* `root_remote_password_login` --- allow SSH root login with password, default `false`
+* `root_password` --- set root password hash, default not set and lock account
 
 Dependencies
 ------------
