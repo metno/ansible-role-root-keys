@@ -5,18 +5,7 @@
     success_msg: "{{ role_name }} supports {{ ansible_distribution }} version {{ ansible_distribution_version }}"
     quiet: "{{ not ansible_check_mode }}"
     that:
-      ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS"
-
-- name: set sshd service name
-  set_fact:
-    sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version|int <= 14 else "sshd" }}'
-
-- name: python selinux module
-  yum:
-    name: libselinux-python
-  when:
-    - ansible_distribution == "CentOS"
-    - ansible_distribution_major_version|int == 6
+      ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS" or ansible_system == "Win32NT"
 
 - name: real list of enabled users if root_keys_users_limit|length > 0
   set_fact:
@@ -29,20 +18,8 @@
   set_fact:
     root_keys_users_real: '{{ root_keys_users_real | default(root_keys_users|selectattr("enabled", "defined")|selectattr("enabled")|map(attribute="user")|list) | union(root_keys_users_always) }}'
 
-- name: fix rights on root/.ssh
-  file:
-    state: directory
-    path: /root/.ssh
-    mode: 0700
-    owner: root
-    group: root
-  when: ansible_system != "Win32NT"
-
-- name: create directory Administrator/.ssh
-  win_file:
-    state: directory
-    path: "C:\\Users\\Administrator\\.ssh"
-  when: ansible_system == "Win32NT"
+- name: include tasks for linux or windows
+  include: "{{ ansible_system | lower }}.yml"
 
 - name: dist authorized_keys
   template:
@@ -51,25 +28,4 @@
     mode: 0600
     owner: root
     group: root
-
-- name: allow/disallow SSH password login for root
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: '^([#]?)(PermitRootLogin) .*$'
-    line: '\2 {{ "yes" if root_remote_password_login else "without-password" }}'
-    validate: 'sshd -t -f %s'
-    backrefs: yes
-  register: linein_ssh_config
-
-- name: reload sshd
-  service:
-    name: '{{ sshd_service_name }}'
-    state: reloaded
-  when: linein_ssh_config is changed
-
-- name: update root password
-  user:
-    name: root
-    password: '{{ root_password | default(omit) }}'
-    password_lock: '{{ true if root_password is not defined else omit }}'
 

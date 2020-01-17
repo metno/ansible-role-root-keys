@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.1.0` --- fixed non working windows, added `root_ssh_config_path` and `administrator_password`
 * `2.0.1` --- updated readme
 * `2.0.0` --- prohibit SSH login with password as default and allow changing root password
 * `1.0.1` --- updated readme
@@ -52,6 +53,8 @@ Role Variables
 * `root_keys_authorized_keys_file` --- path to the authorized_keys file of root, default `/root/.ssh/authorized_keys`
 * `root_remote_password_login` --- allow SSH root login with password, default `false`
 * `root_password` --- set root password hash, default not set and lock account
+* `root_ssh_config_path` --- path for `sshd_config`, default `/etc/ssh/sshd_config`
+* `administrator_password` --- set windows local administrator password in clear text, default not set
 
 Dependencies
 ------------

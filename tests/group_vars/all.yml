@@ -1,5 +1,5 @@
 ---
-root_remote_password_login: true
+root_remote_password_login: false
 #root_password: $6$8ixRjENS0qrBXSPA$xR5Av.WCNGvLtPlaLnMO2fxCrOMIxYnVFUPfz9vDOfZdggtRcLMF5iz7i2FrnOtfHm5QL4xqMRnfovJ.FOEh80
 root_keys_allow_ips:
   - 10.0.0.0/8

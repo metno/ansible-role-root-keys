@@ -1,0 +1,40 @@
+---
+- name: set sshd service name
+  set_fact:
+      sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version|int <= 14 else "sshd" }}'
+
+- name: python selinux module
+  yum:
+    name: libselinux-python
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version|int == 6
+
+- name: allow/disallow SSH password login for root
+  lineinfile:
+    path: '{{ root_ssh_config_path }}'
+    regexp: '^([#]?)(PermitRootLogin) .*$'
+    line: '\2 {{ "yes" if root_remote_password_login else "without-password" }}'
+    validate: 'sshd -t -f %s'
+    backrefs: yes
+  register: linein_ssh_config
+
+- name: reload sshd
+  service:
+    name: '{{ sshd_service_name }}'
+    state: reloaded
+  when: linein_ssh_config is changed
+
+- name: update root password
+  user:
+    name: root
+    password: '{{ root_password | default(omit) }}'
+    password_lock: '{{ true if root_password is not defined else omit }}'
+
+- name: fix rights on root/.ssh
+  file:
+    state: directory
+    path: /root/.ssh
+    mode: 0700
+    owner: root
+    group: root

@@ -6,3 +6,4 @@ root_keys_users_always: []
 root_keys_users: []
 root_keys_authorized_keys_file: "/root/.ssh/authorized_keys"
 root_remote_password_login: false
+root_ssh_config_path: /etc/ssh/sshd_config
