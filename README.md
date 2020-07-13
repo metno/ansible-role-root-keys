@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.1.1` --- prepare for github
 * `2.1.0` --- fixed non working windows, added `root_ssh_config_path` and `administrator_password`
 * `2.0.1` --- updated readme
 * `2.0.0` --- prohibit SSH login with password as default and allow changing root password
@@ -135,7 +136,7 @@ Remove test VMs.
 License
 -------
 
-GPLv2+
+GPLv2
 
 Author Information
 ------------------
