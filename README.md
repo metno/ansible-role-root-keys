@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.1.2` --- tested with Ansible 2.9.11
 * `2.1.1` --- prepare for github
 * `2.1.0` --- fixed non working windows, added `root_ssh_config_path` and `administrator_password`
 * `2.0.1` --- updated readme
