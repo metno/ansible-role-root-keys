@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.1.4` --- removed ubuntu precise from testing
 * `2.1.3` --- added tests for ubuntu focal, 20.04
 * `2.1.2` --- tested with Ansible 2.9.11
 * `2.1.1` --- prepare for github
