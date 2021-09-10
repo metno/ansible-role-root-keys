@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     { :name => "trusty", :box => "ubuntu/trusty64" },
     { :name => "centos8", :box => "centos/8" },
     { :name => "centos7", :box => "centos/7" },
-    { :name => "centos6", :box => "centos/6" },
+    { :name => "rhel8", :box => "generic/rhel8" },
   ]
   boxes.each do |opts|
     config.vm.define opts[:name] do |config|

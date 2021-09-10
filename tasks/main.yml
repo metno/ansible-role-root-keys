@@ -6,6 +6,7 @@
     quiet: "{{ not ansible_check_mode }}"
     that:
       ansible_distribution == "Ubuntu" or ansible_distribution == "CentOS" or ansible_system == "Win32NT"
+      or ( ansible_distribution == "RedHat" and ansible_distribution_major_version|int in [8] )
 
 - name: real list of enabled users if root_keys_users_limit|length > 0
   set_fact:
