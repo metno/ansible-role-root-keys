@@ -34,6 +34,7 @@ This role is limited to:
 
 * Ubuntu
 * CentOS
+* RedHat
 * Windows
 
 Role Variables
