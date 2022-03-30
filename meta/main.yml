@@ -10,13 +10,17 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - all
+    - 22.04
+    - 20.04
+    - 18.04
+    - 16.04
+
   - name: CentOS
     versions:
-    - all
+    - 7
   - name: RedHat
     versions:
-    - all
+    - 8
   - name: Windows
     versions:
     - 2019
