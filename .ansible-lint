@@ -1,4 +1,6 @@
 skip_list:
-- 204
-- 503
-- 701
+  - 204
+  - 503
+  - 701
+  - no-handler
+  - fqcn-builtins

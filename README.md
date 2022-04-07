@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.3.0` --- Added support for Jammy, removed centos8 support.
 * `2.2.0` --- Added support for RHEL8, removed centos6 from testng.
 * `2.1.4` --- removed ubuntu precise from testing
 * `2.1.3` --- added tests for ubuntu focal, 20.04
@@ -32,9 +33,12 @@ Requirements
 
 This role is limited to:
 
-* Ubuntu
-* CentOS
-* RedHat
+* Ubuntu 16.04
+* Ubuntu 18.04
+* Ubuntu 20.04
+* Ubuntu 22.04
+* CentOS 7
+* RHEL 8
 * Windows
 
 Role Variables
