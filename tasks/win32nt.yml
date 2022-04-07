@@ -11,7 +11,7 @@
     regexp: '^([#]?)(PermitRootLogin) .*$'
     line: '\2 {{ "yes" if root_remote_password_login else "without-password" }}'
     validate: 'sshd -t -f %s'
-    backrefs: yes
+    backrefs: true
   register: linein_ssh_configo
   when: root_ssh_config_path != '/etc/ssh/sshd_config'
 
@@ -19,4 +19,3 @@
   win_file:
     state: directory
     path: "C:\\Users\\Administrator\\.ssh"
-
