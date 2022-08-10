@@ -25,7 +25,8 @@
   lineinfile:
     state: present
     path: '{{ root_ssh_config_path }}'
-    line: "PermitRootLogin without-password"
+    line: 'PermitRootLogin {{ "yes" if root_remote_password_login else "without-password" }}'
+    validate: 'sshd -t -f %s'
   when: check.found == 0
   register: permitroot
 
