@@ -1,6 +1,6 @@
 ---
 root_remote_password_login: false
-#root_password: $6$8ixRjENS0qrBXSPA$xR5Av.WCNGvLtPlaLnMO2fxCrOMIxYnVFUPfz9vDOfZdggtRcLMF5iz7i2FrnOtfHm5QL4xqMRnfovJ.FOEh80
+# root_password: $6$8ixRjENS0qrBXSPA$xR5Av.WCNGvLtPlaLnMO2fxCrOMIxYnVFUPfz9vDOfZdggtRcLMF5iz7i2FrnOtfHm5QL4xqMRnfovJ.FOEh80
 root_keys_allow_ips:
   - 10.0.0.0/8
   - 172.16.0.0/24
@@ -20,8 +20,13 @@ root_keys_users:
 
 root_keys_users_custom:
   - user: user3
-    key: |
-      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyLO8A5/7+Ckyl5REO5RpVg1Hpm4t9oM+Rum6k9W8fr6MqgpbJuDJ9mmb5AsoaL80J62mvZQZqXqYCtAfL7ZXMcZZiFwbhpdwRehFfR8vDjae4P4AooV7Vk99I1jvumes1z/FQMvue27lromgMejq/GcEAndlY9smYuQXLy3ajUw3dV+w4rm4L3+Qbps1lft8PZU/G0FMMqqTIPPdcLOLgD/d/625RhVtwqx0C/z3fykylFJ4RkWYQK5p0F/BO8Rr1un7AWYl2ITnOpxe99B9YfE2GI9sTvFAp221cEiozRPBIGJIa1JoZl+tDzb4XbF27Zjs3+6ywbSC5nrIW5gArlgavwKd+fL6vyDJXD+NM86QcGZvlhnMr4wanfHo6JVnekgbxWVaag/JY+yVO3RVZ/VdN+4nF1PXyjmdaLGebUrTDCh2JiPmSZ5Q7y9oyH5/ayJnGxVGCN/d8RK1So2UUhkWV+Z4J22yc2PEc1RD7HyLEI1t9WCT6nciY/t5it2E=
+    key: >-
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyLO8A5/7+Ckyl5REO5RpVg1Hpm4t9oM+Rum6k9W8fr6MqgpbJuDJ9mmb5Asoa
+      L80J62mvZQZqXqYCtAfL7ZXMcZZiFwbhpdwRehFfR8vDjae4P4AooV7Vk99I1jvumes1z/FQMvue27lromgMejq/GcEAndlY9smY
+      uQXLy3ajUw3dV+w4rm4L3+Qbps1lft8PZU/G0FMMqqTIPPdcLOLgD/d/625RhVtwqx0C/z3fykylFJ4RkWYQK5p0F/BO8Rr1un7A
+      WYl2ITnOpxe99B9YfE2GI9sTvFAp221cEiozRPBIGJIa1JoZl+tDzb4XbF27Zjs3+6ywbSC5nrIW5gArlgavwKd+fL6vyDJXD+NM
+      86QcGZvlhnMr4wanfHo6JVnekgbxWVaag/JY+yVO3RVZ/VdN+4nF1PXyjmdaLGebUrTDCh2JiPmSZ5Q7y9oyH5/ayJnGxVGCN/d8
+      RK1So2UUhkWV+Z4J22yc2PEc1RD7HyLEI1t9WCT6nciY/t5it2E=
     enabled: true
     allow_ips:
     restrict:

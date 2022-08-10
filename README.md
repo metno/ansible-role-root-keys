@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.3.1` --- Bugfix
 * `2.3.0` --- Added support for Jammy, removed centos8 support.
 * `2.2.0` --- Added support for RHEL8, removed centos6 from testng.
 * `2.1.4` --- removed ubuntu precise from testing
