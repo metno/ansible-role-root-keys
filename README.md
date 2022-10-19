@@ -15,7 +15,7 @@ This role configures the following.
 Version
 -------
 
-* `2.3.3` --- added RHEL9 and CentOS8 support
+* `2.4.0` --- added RHEL9 and CentOS8 support
 * `2.3.2` --- Fixed setting PermitRootLogin when it is not previously set
 * `2.3.1` --- Bugfix
 * `2.3.0` --- Added support for Jammy, removed centos8 support.
