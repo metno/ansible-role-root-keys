@@ -3,3 +3,4 @@ skip_list:
   - 701
   - no-handler
   - fqcn-builtins
+  - deprecated-module

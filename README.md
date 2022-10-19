@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `2.3.3` --- added RHEL9 and CentOS8 support
 * `2.3.2` --- Fixed setting PermitRootLogin when it is not previously set
 * `2.3.1` --- Bugfix
 * `2.3.0` --- Added support for Jammy, removed centos8 support.
@@ -40,7 +41,9 @@ This role is limited to:
 * Ubuntu 20.04
 * Ubuntu 22.04
 * CentOS 7
+* CentOS 8
 * RHEL 8
+* RHEL 9
 * Windows
 
 Role Variables
