@@ -28,6 +28,7 @@
 - name: Include tasks for linux or windows
   include: "{{ ansible_system | lower }}.yml"
 
+
 - name: Dist authorized_keys
   template:
     src: authorized_keys.j2
