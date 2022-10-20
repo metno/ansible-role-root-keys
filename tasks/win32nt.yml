@@ -1,11 +1,11 @@
-- name: update administrator password
+- name: Update administrator password
   win_user:
     name: Administrator
     password: '{{ administrator_password }}'
   when: administrator_passord is defined
   no_log: true
 
-- name: allow/disallow SSH password login for root
+- name: Allow/disallow SSH password login for root
   lineinfile:
     path: '{{ root_ssh_config_path }}'
     regexp: '^([#]?)(PermitRootLogin) .*$'
@@ -15,7 +15,7 @@
   register: linein_ssh_configo
   when: root_ssh_config_path != '/etc/ssh/sshd_config'
 
-- name: create directory Administrator/.ssh
+- name: Create directory Administrator/.ssh
   win_file:
     state: directory
     path: "C:\\Users\\Administrator\\.ssh"

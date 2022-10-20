@@ -1,9 +1,9 @@
 ---
-- name: set sshd service name
+- name: Set sshd service name
   set_fact:
-    sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version|int <= 14 else "sshd" }}'
+    sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version | int <= 14 else "sshd" }}'
 
-- name: allow/disallow SSH password login for root
+- name: Allow/disallow SSH password login for root
   lineinfile:
     path: '{{ root_ssh_config_path }}'
     regexp: '^([#]?)(PermitRootLogin) .*$'
@@ -30,19 +30,19 @@
   when: check.found == 0
   register: permitroot
 
-- name: reload sshd
+- name: Reload sshd
   service:
     name: '{{ sshd_service_name }}'
     state: reloaded
   when: (linein_ssh_config is changed) or (permitroot is changed)
 
-- name: update root password
+- name: Update root password
   user:
     name: root
     password: '{{ root_password | default(omit) }}'
     password_lock: '{{ true if root_password is not defined else omit }}'
 
-- name: fix rights on root/.ssh
+- name: Fix rights on root/.ssh
   file:
     state: directory
     path: /root/.ssh
