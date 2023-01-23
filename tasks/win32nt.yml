@@ -1,5 +1,5 @@
 - name: Update administrator password
-  win_user:
+  ansible.windows.win_user:
     name: Administrator
     password: '{{ administrator_password }}'
   when: administrator_passord is defined
@@ -16,6 +16,6 @@
   when: root_ssh_config_path != '/etc/ssh/sshd_config'
 
 - name: Create directory Administrator/.ssh
-  win_file:
+  ansible.windows.win_file:
     state: directory
     path: "C:\\Users\\Administrator\\.ssh"

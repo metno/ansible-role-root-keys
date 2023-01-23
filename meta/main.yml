@@ -32,6 +32,7 @@ galaxy_info:
     - root
     - ssh
 
-collections: []
+collections:
+  - "ansible.windows"
 
 dependencies: []
