@@ -1,6 +1,6 @@
 skip_list:
-  - 503
-  - 701
+  - "503"
+  - "701"
   - no-handler
   - fqcn-builtins
   - deprecated-module

@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `3.0.0` --- update to ansible 2.12.0
 * `2.4.0` --- added RHEL9 and CentOS8 support
 * `2.3.2` --- Fixed setting PermitRootLogin when it is not previously set
 * `2.3.1` --- Bugfix
