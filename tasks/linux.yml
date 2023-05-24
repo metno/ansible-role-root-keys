@@ -46,6 +46,6 @@
   ansible.builtin.file:
     state: directory
     path: /root/.ssh
-    mode: 0700
-    owner: root
-    group: root
+    mode: '0700'
+    owner: 'root'
+    group: 'root'
