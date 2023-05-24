@@ -1,6 +1,6 @@
 ---
 - name: Check if we are running supported os
-  assert:
+  ansible.builtin.assert:
     fail_msg: "{{ role_name }} only supports ubuntu versions 16, 18, 20, 22,   centos versions 7, centos strem versions 8, rhel versions 8, 9!"
     success_msg: "{{ role_name }} supports {{ ansible_distribution }} version {{ ansible_distribution_version }}"
     quiet: "{{ not ansible_check_mode }}"
@@ -11,7 +11,7 @@
       or ( ansible_distribution == "Win32NT" )
 
 - name: Real list of enabled users if root_keys_users_limit | length > 0
-  set_fact:
+  ansible.builtin.set_fact:
     root_keys_users_real: >-
       {{ root_keys_users | selectattr("enabled", "defined") | selectattr("enabled")
       | map(attribute="user") | list | intersect(root_keys_users_limit) }}
@@ -20,18 +20,19 @@
 - name: |
     Always add root_keys_users_always
     use all enabled users as base if root_keys_users_limit | length == 0
-  set_fact:
+  ansible.builtin.set_fact:
     root_keys_users_real: >-
       {{ root_keys_users_real | default(root_keys_users | selectattr("enabled", "defined")
       | selectattr("enabled") | map(attribute="user") | list) | union(root_keys_users_always) }}
 
 - name: Include tasks for linux or windows
-  include: "{{ ansible_system | lower }}.yml"
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_system | lower }}.yml"
 
 - name: Dist authorized_keys
-  template:
+  ansible.builtin.template:
     src: authorized_keys.j2
     dest: "{{ root_keys_authorized_keys_file }}"
-    mode: 0600
-    owner: root
-    group: root
+    mode: '0600'
+    owner: 'root'
+    group: 'root'
