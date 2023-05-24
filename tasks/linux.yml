@@ -1,10 +1,10 @@
 ---
 - name: Set sshd service name
-  set_fact:
+  ansible.builtin.set_fact:
     sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version | int <= 14 else "sshd" }}'
 
 - name: Allow/disallow SSH password login for root
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: '{{ root_ssh_config_path }}'
     regexp: '^([#]?)(PermitRootLogin) .*$'
     line: '\2 {{ "yes" if root_remote_password_login else "without-password" }}'
@@ -13,7 +13,7 @@
   register: linein_ssh_config
 
 - name: Check if PermitRootLogin is already set
-  lineinfile:
+  ansible.builtin.lineinfile:
     state: absent
     path: '{{ root_ssh_config_path }}'
     regexp: '^([#]?)(PermitRootLogin) .*$'
@@ -22,7 +22,7 @@
   register: check
 
 - name: Set PermitRootLogin if not set
-  lineinfile:
+  ansible.builtin.lineinfile:
     state: present
     path: '{{ root_ssh_config_path }}'
     line: 'PermitRootLogin {{ "yes" if root_remote_password_login else "without-password" }}'
@@ -31,19 +31,19 @@
   register: permitroot
 
 - name: Reload sshd
-  service:
+  ansible.builtin.service:
     name: '{{ sshd_service_name }}'
     state: reloaded
   when: (linein_ssh_config is changed) or (permitroot is changed)
 
 - name: Update root password
-  user:
+  ansible.builtin.user:
     name: root
     password: '{{ root_password | default(omit) }}'
     password_lock: '{{ true if root_password is not defined else omit }}'
 
 - name: Fix rights on root/.ssh
-  file:
+  ansible.builtin.file:
     state: directory
     path: /root/.ssh
     mode: 0700

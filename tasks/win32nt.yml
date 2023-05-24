@@ -6,7 +6,7 @@
   no_log: true
 
 - name: Allow/disallow SSH password login for root
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: '{{ root_ssh_config_path }}'
     regexp: '^([#]?)(PermitRootLogin) .*$'
     line: '\2 {{ "yes" if root_remote_password_login else "without-password" }}'
