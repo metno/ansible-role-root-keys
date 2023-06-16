@@ -6,35 +6,16 @@
 - name: Allow/disallow SSH password login for root
   ansible.builtin.lineinfile:
     path: '{{ root_ssh_config_path }}'
-    regexp: '^([#]?)(PermitRootLogin) .*$'
-    line: '\2 {{ "yes" if root_remote_password_login else "without-password" }}'
-    validate: 'sshd -t -f %s'
-    backrefs: true
-  register: linein_ssh_config
-
-- name: Check if PermitRootLogin is already set
-  ansible.builtin.lineinfile:
-    state: absent
-    path: '{{ root_ssh_config_path }}'
-    regexp: '^([#]?)(PermitRootLogin) .*$'
-  check_mode: true
-  changed_when: false
-  register: check
-
-- name: Set PermitRootLogin if not set
-  ansible.builtin.lineinfile:
-    state: present
-    path: '{{ root_ssh_config_path }}'
+    regexp: '^\s*#?\s*PermitRootLogin(\s.*)?$'
     line: 'PermitRootLogin {{ "yes" if root_remote_password_login else "without-password" }}'
     validate: 'sshd -t -f %s'
-  when: check.found == 0
-  register: permitroot
+  register: linein_ssh_config
 
 - name: Reload sshd
   ansible.builtin.service:
     name: '{{ sshd_service_name }}'
     state: reloaded
-  when: (linein_ssh_config is changed) or (permitroot is changed)
+  when: linein_ssh_config is changed
 
 - name: Update root password
   ansible.builtin.user:

@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `3.1.0` --- Initial support for Fedora CoreOS, but with no tests. Also disabled coreos testing.
 * `3.0.1` --- bug fix, ansible-linting
 * `3.0.0` --- update to ansible 2.12.0
 * `2.4.0` --- added RHEL9 and CentOS8 support
@@ -38,6 +39,7 @@ Requirements
 
 This role is limited to:
 
+* Fedora CoreOS 38
 * Ubuntu 16.04
 * Ubuntu 18.04
 * Ubuntu 20.04
@@ -135,6 +137,9 @@ Append to default lists in `group_vars` or `host_vars`.
 
 Testing
 -------
+
+NOTICE: Fedora CoreOS is tested manually, but currently no automatic tests
+are added for FCOS.
 
 Testing the role with Vagrant running on VirtualBox.
 
