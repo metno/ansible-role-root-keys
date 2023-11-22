@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `3.1.1` --- Allow Fedora CoreOS 39 to run. No tests has been done
 * `3.1.0` --- Initial support for Fedora CoreOS, but with no tests. Also disabled coreos testing.
 * `3.0.1` --- bug fix, ansible-linting
 * `3.0.0` --- update to ansible 2.12.0
@@ -40,6 +41,7 @@ Requirements
 This role is limited to:
 
 * Fedora CoreOS 38
+* Fedora CoreOS 39
 * Ubuntu 16.04
 * Ubuntu 18.04
 * Ubuntu 20.04
