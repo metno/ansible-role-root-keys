@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `3.2.0` --- Added `root_keys_authorized_keys_file_owner` and `root_keys_authorized_keys_file_group`.
 * `3.1.1` --- Allow Fedora CoreOS 39 to run. No tests has been done
 * `3.1.0` --- Initial support for Fedora CoreOS, but with no tests. Also disabled coreos testing.
 * `3.0.1` --- bug fix, ansible-linting
@@ -72,6 +73,8 @@ Role Variables
 * `root_keys_users_limit` --- limit to only a list of root users, default `[]`
 * `root_keys_users_always` --- always add this list of root users, overrides `root_keys_users_limit`, default `['ansible']`
 * `root_keys_authorized_keys_file` --- path to the authorized_keys file of root, default `/root/.ssh/authorized_keys`
+* `root_keys_authorized_keys_file_owner` --- owner of the authorized_keys file, default `root`
+* `root_keys_authorized_keys_file_group` --- group of the authorized_keys file, default `root`
 * `root_remote_password_login` --- allow SSH root login with password, default `false`
 * `root_password` --- set root password hash, default not set and lock account
 * `root_ssh_config_path` --- path for `sshd_config`, default `/etc/ssh/sshd_config`

@@ -35,5 +35,5 @@
     src: authorized_keys.j2
     dest: "{{ root_keys_authorized_keys_file }}"
     mode: '0600'
-    owner: 'root'
-    group: 'root'
+    owner: '{{ root_keys_authorized_keys_file_owner }}'
+    group: '{{ root_keys_authorized_keys_file_group }}'
