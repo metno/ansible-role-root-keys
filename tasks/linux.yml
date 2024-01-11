@@ -11,7 +11,7 @@
     validate: 'sshd -t -f %s'
   register: linein_ssh_config
 
-- name: Reload sshd
+- name: Reload sshd  # noqa: no-handler
   ansible.builtin.service:
     name: '{{ sshd_service_name }}'
     state: reloaded
