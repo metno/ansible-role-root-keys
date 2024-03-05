@@ -5,7 +5,7 @@ galaxy_info:
   description: Configure root ssh access with ssh keys
   company: MET Norway
   role_name: root_keys
-  namespace: met
+  namespace: metno
   standalone: true
 
   license: GPLv2
@@ -15,6 +15,7 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
+        - "noble"
         - "jammy"
         - "focal"
         - "bionic"
