@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `3.3.1` --- Update meta/main.yml
 * `3.3.0` --- Added support for Ubuntu 24.04
 * `3.2.0` --- Added `root_keys_authorized_keys_file_owner` and `root_keys_authorized_keys_file_group`.
 * `3.1.1` --- Allow Fedora CoreOS 39 to run. No tests has been done
