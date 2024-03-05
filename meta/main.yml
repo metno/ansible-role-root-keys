@@ -6,7 +6,6 @@ galaxy_info:
   company: MET Norway
   role_name: root_keys
   namespace: metno
-  standalone: true
 
   license: GPLv2
 
