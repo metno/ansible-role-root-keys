@@ -1,7 +1,7 @@
 ---
 - name: Set sshd service name
   ansible.builtin.set_fact:
-    sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version | int <= 14 else ( "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version | int == 24 else "sshd" ) }}'
+    sshd_service_name: '{{ "ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version | int <= 14 else ("ssh" if ansible_distribution == "Ubuntu" and ansible_distribution_version | int == 24 else "sshd") }}' # noqa: yaml[line-length]
 
 - name: Allow/disallow SSH password login for root
   ansible.builtin.lineinfile:
