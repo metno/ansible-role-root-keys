@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `4.0.0` --- Add Ansible-core 2.16. Removed support for Ubuntu xenial and bionic
 * `3.3.1` --- Update meta/main.yml
 * `3.3.0` --- Added support for Ubuntu 24.04
 * `3.2.0` --- Added `root_keys_authorized_keys_file_owner` and `root_keys_authorized_keys_file_group`.
@@ -169,7 +170,7 @@ GPLv2
 Author Information
 ------------------
 
-* Arnulf Heimsbakk <aheimsbakk@met.no>
-* Audun Marius Gangstø <audunmg@met.no>
+Created 2020 by IT Infrastructure at MET Norway
+Contactpoint: [IT Infrastructure Basis Team](mailto:it-is-basis@met.no)
 
 ###### set vim: spell spelllang=en:
