@@ -1,0 +1,81 @@
+- name: Verify
+  become: true
+  hosts: all
+  gather_facts: false
+  vars:
+    authorized_keys_file: "/root/.ssh/authorized_keys"  # Path to the authorized_keys file
+    expected_keys:  # List of expected keys with restrictions, IPs, key type, and public key
+      - restrictions: 'restrict,pty,from="10.0.0.0/8,172.16.0.0/24"'
+        key_type: "ssh-ed25519"
+        public_key: "AAAAC3NzaC1lZDI1NTE5AAAAIHkCVF05JvfkrfOOESivOxV4N8+A/EMEkF7/nCQMRoQg"
+        comment: "user1"
+      - restrictions: 'restrict,pty,agent-forwarding,from="192.168.0.0/24"'
+        key_type: "ssh-ed25519"
+        public_key: "AAAAC3NzaC1lZDI1NTE5AAAAIDXBWyAhgHwuJEpIsqS/8Tl3yD4p8Mu9SR31lnM7/PKm"
+        comment: "user2"
+    root_pass_hash: "$y$j9T$IEjk4/BLKjLlxO13kYBF5.$Z6QXh/1FyuTdhUDD.KIcvX.gBPTLFXMEr2JinZNCGd3"
+
+  tasks:
+    - name: Read the content of the authorized_keys file
+      ansible.builtin.slurp:
+        src: "{{ authorized_keys_file }}"
+      register: authorized_keys_content
+
+    - name: Decode the content of the authorized_keys file
+      ansible.builtin.set_fact:
+        authorized_keys_decoded: "{{ authorized_keys_content['content'] | b64decode }}"
+
+    - name: Split the authorized_keys content into lines
+      ansible.builtin.set_fact:
+        authorized_keys_lines: "{{ authorized_keys_decoded.splitlines() }}"
+
+    - name: Check each key in the authorized_keys file
+      ansible.builtin.assert:
+        that:
+          - item.split()[0] == expected_key.restrictions  # Check restrictions and allowed IPs
+          - item.split()[1] == expected_key.key_type      # Check key type
+          - item.split()[2] == expected_key.public_key    # Check the public key
+          - (item.split() | length > 3 and item.split()[3] == expected_key.comment)  # Check comment if it exists
+        fail_msg: >
+          Key on line {{ item }} does not match the expected restrictions, IPs, key, or comment.
+        success_msg: >
+          Key on line {{ item }} matches the expected restrictions, IPs, key, and comment.
+      with_items: "{{ authorized_keys_lines }}"
+      loop_control:
+        label: "{{ item }}"
+      vars:
+        expected_key: "{{ expected_keys | selectattr('restrictions', 'equalto', item.split()[0]) | first }}"
+
+    - name: Read root password hash from /etc/shadow
+      slurp:
+        src: /etc/shadow
+      register: shadow_file
+
+    - name: Debug decoded shadow content
+      debug:
+        msg: "{{ shadow_file['content'] | b64decode }}"
+
+    - name: Extract root password hash without regex
+      set_fact:
+        root_hash: >-
+          {{
+            (
+              (shadow_file['content'] | b64decode).splitlines()
+              | select('search', '^root:')
+              | list
+              | first
+              | split(':')
+            )[1]
+          }}
+
+    - name: Fail if root hash could not be extracted
+      fail:
+        msg: "Failed to extract the root password hash from /etc/shadow. Ensure the file contains a valid root user entry."
+      when: root_hash is none
+
+    - name: Assert that the root password hash matches the supplied hash
+      assert:
+        that:
+          - root_hash == root_pass_hash
+        fail_msg: "The root password hash does NOT match the supplied hash!"
+        success_msg: "The root password hash matches the supplied hash!"

@@ -1,0 +1,22 @@
+---
+root_keys_allow_ips:
+  - 10.0.0.0/8
+  - 172.16.0.0/24
+root_keys_restrict: restrict,pty
+root_keys_users:
+  - user: user1
+    key: |
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkCVF05JvfkrfOOESivOxV4N8+A/EMEkF7/nCQMRoQg user1
+    enabled: true
+  - user: user2
+    key: |
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXBWyAhgHwuJEpIsqS/8Tl3yD4p8Mu9SR31lnM7/PKm user2
+    allow_ips:
+      - 192.168.0.0/24
+    restrict: restrict,pty,agent-forwarding
+    enabled: true
+root_keys_users_limit:
+  - user1
+root_keys_users_always:
+  - user2
+root_password: $y$j9T$IEjk4/BLKjLlxO13kYBF5.$Z6QXh/1FyuTdhUDD.KIcvX.gBPTLFXMEr2JinZNCGd3
