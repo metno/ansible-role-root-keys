@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `4.0.2` --- Move testing to Ansible Molecule
 * `4.0.1` --- Update support for Fedora CoreOS to v41 (and remove older versions)
 * `4.0.0` --- Add Ansible-core 2.16. Removed support for Ubuntu xenial and bionic
 * `3.3.1` --- Update meta/main.yml
@@ -146,21 +147,27 @@ Append to default lists in `group_vars` or `host_vars`.
 Testing
 -------
 
-NOTICE: Fedora CoreOS is tested manually, but currently no automatic tests
-are added for FCOS.
+Testing is done using Ansible Molecule. It uses Vagrant with libvirt as backend.
 
-Testing the role with Vagrant running on VirtualBox.
+To run full test run:
 
-    cd tests
-    vagrant up
+```bash
+molecule test
+```
 
-Rerun tests.
+To run test step by step run:
 
-    vagrant provision
+```bash
+molecule create
+molecule converge
+molecule verify
+molecule destroy
+```
 
-Remove test VMs.
-
-    vagrant destroy -f
+To run toward specific scenario use `-s` option.
+```
+molecule test -s ubuntu
+```
 
 License
 -------
