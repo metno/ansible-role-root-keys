@@ -15,7 +15,8 @@ This role configures the following.
 Version
 -------
 
-* `4.0.1` --- Move testing to Ansible Molecule
+* `4.0.2` --- Move testing to Ansible Molecule
+* `4.0.1` --- Update support for Fedora CoreOS to v41 (and remove older versions)
 * `4.0.0` --- Add Ansible-core 2.16. Removed support for Ubuntu xenial and bionic
 * `3.3.1` --- Update meta/main.yml
 * `3.3.0` --- Added support for Ubuntu 24.04
@@ -45,8 +46,7 @@ Requirements
 
 This role is limited to:
 
-* Fedora CoreOS 38
-* Fedora CoreOS 39
+* Fedora CoreOS 41
 * Ubuntu 16.04
 * Ubuntu 18.04
 * Ubuntu 20.04
