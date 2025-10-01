@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `4.1.0` --- Added support for RHEL10. The role now supports os_family = redhat.
 * `4.0.2` --- Move testing to Ansible Molecule
 * `4.0.1` --- Update support for Fedora CoreOS to v41 (and remove older versions)
 * `4.0.0` --- Add Ansible-core 2.16. Removed support for Ubuntu xenial and bionic
@@ -44,17 +45,13 @@ Version
 Requirements
 ------------
 
-This role is limited to:
+This role supports
 
-* Fedora CoreOS 41
-* Ubuntu 16.04
-* Ubuntu 18.04
-* Ubuntu 20.04
-* Ubuntu 22.04
+* RedHat Based OS, version 8,9,10
+* Ubuntu 20.04, 22.04, and 24.04
 * CentOS 7
-* CentOS 8
-* RHEL 8
-* RHEL 9
+* CentOS Stream 8
+* Fedora CoreOS 41
 * Windows
 
 Role Variables
