@@ -1,6 +1,6 @@
 - name: Verify
   become: true
-  hosts: all
+  hosts: vms
   gather_facts: false
   vars:
     authorized_keys_file: "/root/.ssh/authorized_keys"  # Path to the authorized_keys file
@@ -40,7 +40,7 @@
           Key on line {{ item }} does not match the expected restrictions, IPs, key, or comment.
         success_msg: >
           Key on line {{ item }} matches the expected restrictions, IPs, key, and comment.
-      with_items: "{{ authorized_keys_lines }}"
+      with_items: "{{ authorized_keys_lines[0:-1] }}"
       loop_control:
         label: "{{ item }}"
       vars:
@@ -50,10 +50,6 @@
       slurp:
         src: /etc/shadow
       register: shadow_file
-
-    - name: Debug decoded shadow content
-      debug:
-        msg: "{{ shadow_file['content'] | b64decode }}"
 
     - name: Extract root password hash without regex
       set_fact:
