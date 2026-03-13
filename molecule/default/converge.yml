@@ -1,7 +1,21 @@
 - name: Converge
   become: true
-  hosts: all
+  hosts: vms
   gather_facts: true
+
+  pre_tasks:
+    - name: Set variables that need to be set on localhost
+      ansible.builtin.set_fact:
+        libvirt_provision_root_ssh_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
+      delegate_to: localhost
 
   roles:
     - name: metno.root_keys
+
+  tasks:
+    - name: Add SSH key
+      ansible.posix.authorized_key:
+        user: root
+        key: "{{ libvirt_provision_root_ssh_key }}"
+        state: present
+        manage_dir: yes
