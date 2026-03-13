@@ -15,6 +15,7 @@ This role configures the following.
 Version
 -------
 
+* `4.1.1` --- Updated molecule test setup
 * `4.1.0` --- Added support for RHEL10. The role now supports os_family = redhat.
 * `4.0.2` --- Move testing to Ansible Molecule
 * `4.0.1` --- Update support for Fedora CoreOS to v41 (and remove older versions)
@@ -144,7 +145,7 @@ Append to default lists in `group_vars` or `host_vars`.
 Testing
 -------
 
-Testing is done using Ansible Molecule. It uses Vagrant with libvirt as backend.
+Testing is done using Ansible Molecule. It uses our libvirt-provision role as backend.
 
 To run full test run:
 
@@ -159,11 +160,6 @@ molecule create
 molecule converge
 molecule verify
 molecule destroy
-```
-
-To run toward specific scenario use `-s` option.
-```
-molecule test -s ubuntu
 ```
 
 License
