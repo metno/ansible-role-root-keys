@@ -6,6 +6,7 @@ driver:
     login_cmd_template: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -l {user} {address}"
 
 platforms:
+  - name: root-keys-resolute
   - name: root-keys-noble
   - name: root-keys-jammy
   - name: root-keys-alma8
@@ -18,6 +19,7 @@ ansible:
     args:
       ansible_playbook:
         - --inventory=${MOLECULE_SCENARIO_DIRECTORY}/inventory.yml
+        - -vv
   env:
     ANSIBLE_FORCE_COLOR: true
   cfg:
